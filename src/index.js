@@ -4,11 +4,16 @@ const { Octokit } = require("@octokit/action");
 const main = async () => {
     const gist_id = core.getInput("gist_id");
     const action = core.getInput("action");
+    const token = core.getInput("token");
+
+    if (!token) throw "Token not provided";
+
+    const octokit = new Octokit({
+        auth: token,
+    });
 
     switch (action) {
         case "get": {
-            const octokit = new Octokit();
-
             const filename = core.getInput("file_name");
 
             const gist = await octokit.gists.get({ gist_id });
@@ -30,14 +35,6 @@ const main = async () => {
         }
 
         case "update": {
-            const token = core.getInput("token");
-
-            if (!token) throw "Token not provided";
-
-            const octokit = new Octokit({
-                auth: token,
-            });
-
             const filename = core.getInput("file_name");
             const content = core.getInput("content");
 
