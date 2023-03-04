@@ -1766,10 +1766,9 @@ exports.checkBypass = checkBypass;
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
-var __webpack_unused_export__;
 
 
-__webpack_unused_export__ = ({ value: true });
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 var core = __nccwpck_require__(2962);
 var authAction = __nccwpck_require__(3486);
@@ -1810,7 +1809,7 @@ function getApiBaseUrl() {
   return process.env["GITHUB_API_URL"] || "https://api.github.com";
 }
 
-exports.v = Octokit;
+exports.Octokit = Octokit;
 //# sourceMappingURL=index.js.map
 
 
@@ -10982,71 +10981,26 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(3722);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _octokit_action__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(3145);
-
-
+const core = __nccwpck_require__(3722);
+const { Octokit } = __nccwpck_require__(3145);
 
 const main = async () => {
-    const gist_id = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("gist_id");
-    const action = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("action");
+    const gist_id = core.getInput("gist_id");
+    const action = core.getInput("action");
 
     switch (action) {
         case "get": {
-            const octokit = new _octokit_action__WEBPACK_IMPORTED_MODULE_1__/* .Octokit */ .v();
+            const octokit = new Octokit();
 
-            const filename = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("file_name");
+            const filename = core.getInput("file_name");
 
             const gist = await octokit.gists.get({ gist_id });
             const files = gist.data.files;
@@ -11061,22 +11015,22 @@ const main = async () => {
 
             if (!file?.content) throw "File content not found";
 
-            _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setOutput("content", file.content);
+            core.setOutput("content", file.content);
 
             break;
         }
 
         case "update": {
-            const token = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("token");
+            const token = core.getInput("token");
 
             if (!token) throw "Token not provided";
 
-            const octokit = new _octokit_action__WEBPACK_IMPORTED_MODULE_1__/* .Octokit */ .v({
+            const octokit = new Octokit({
                 auth: token,
             });
 
-            const filename = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("file_name");
-            const content = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("content");
+            const filename = core.getInput("file_name");
+            const content = core.getInput("content");
 
             if (!filename) throw "File name not provided";
             if (!content) throw "File content not provided";
@@ -11100,7 +11054,7 @@ const main = async () => {
 main().catch((error) => {
     console.error(error);
 
-    _actions_core__WEBPACK_IMPORTED_MODULE_0___default().setFailed(error.message);
+    core.setFailed(error.message);
 });
 })();
 

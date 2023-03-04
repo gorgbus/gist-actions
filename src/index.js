@@ -1,5 +1,5 @@
-import core from "@actions/core";
-import { Octokit } from "@octokit/action";
+const core = require("@actions/core");
+const { Octokit } = require("@octokit/action");
 
 const main = async () => {
     const gist_id = core.getInput("gist_id");
