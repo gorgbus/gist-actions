@@ -1,0 +1,28 @@
+name: "Gist Actions"
+description: "allows you to interact with github gists"
+
+branding:
+  icon: "arrow-down"
+  color: "purple"
+
+inputs:
+  gist_id:
+    description: "id of the gist"
+    required: true
+  action:
+    description: "what you want to do"
+    required: true
+  token:
+    description: "github access token"
+  file_name:
+    description: "name of the file you want to get/update"
+  content:
+    description: "content of the file to be updated"
+
+outputs:
+  content:
+    description: "file contents from the gist"
+
+runs:
+  using: "node16"
+  main: "build/index.js"
