@@ -1,6 +1,9 @@
 # gist-actions
 allows you to interact with github gists
 
+# Requirements
+create a personal access token with `gist` scope and add it as `env` to the job ([see in examples](#get-action))
+
 # Inputs
 `with:`
 - `action` defines what you want to do (`get`,`update`)
@@ -15,6 +18,8 @@ allows you to interact with github gists
 - name: Read gist
   id: gist_content
   uses: gorgbus/gist-actions@main
+  env:
+    GITHUB_TOKEN: ${{ secrets.TOKEN }}
   with:
     action: "get"
     gist_id: "ce9ca1f249b6a703d5f38b3816da0042"
@@ -28,6 +33,8 @@ allows you to interact with github gists
 - name: Read gist
   id: gist_content
   uses: gorgbus/gist-actions@main
+  env:
+    GITHUB_TOKEN: ${{ secrets.TOKEN }}
   with:
     action: "get"
     gist_id: "ce9ca1f249b6a703d5f38b3816da0042"
@@ -43,6 +50,8 @@ allows you to interact with github gists
 
 - name: Update gist
   uses: gorgbus/gist-actions@main
+  env:
+    GITHUB_TOKEN: ${{ secrets.TOKEN }}
   with:
     action: "update"
     gist_id: "ce9ca1f249b6a703d5f38b3816da0042"
